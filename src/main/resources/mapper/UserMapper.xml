@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.zjer.dao.UserDao">
+    <!--注册模块-->
+    <insert id="save" parameterType="com.zjer.entity.User">
+        INSERT INTO user VALUES (#{id}, #{name}, #{pass}, "开心超人", "男", "江苏省-南京市", "1970/01/01", #{enrolldate}, #{lastdate})
+    </insert>
+
+    <!--登陆模块-->
+    <select id="findByName" parameterType="string" resultType="com.zjer.entity.User">
+        SELECT * FROM user WHERE name = #{name}
+    </select>
+
+    <!--修改密码-->
+    <update id="updatePass" parameterType="com.zjer.entity.User">
+        UPDATE user SET pass = #{pass} WHERE name = #{name}
+    </update>
+
+    <!--获取所有用户-->
+    <select id="findAll" resultType="com.zjer.entity.User">
+        SELECT * FROM user
+    </select>
+
+    <!--获取某个用户的所有信息-->
+    <select id="findUser" resultType="com.zjer.entity.User">
+        SELECT * FROM user WHERE name = #{name}
+    </select>
+
+    <!--修改个人资料-->
+    <update id="saveEdit" parameterType="com.zjer.entity.User">
+        UPDATE user SET nick = #{nick}, sex = #{sex}, place = #{place}, birth = #{birth} WHERE name = #{name}
+    </update>
+</mapper>
